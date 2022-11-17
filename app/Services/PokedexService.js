@@ -5,13 +5,14 @@ const pokeDexApi = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/'
 })
 
-
-
 class PokedexService {
+
 
     async getOnePokemon(name) {
         const res = await pokeDexApi.get(`pokemon/${name}`)
         console.log('get one pokemon', res.data);
+        appState.activePokemon = new Pokedex(res.data)
+        console.log(appState.activePokemon);
     }
 
 

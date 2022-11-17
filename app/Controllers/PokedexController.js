@@ -12,6 +12,15 @@ function _drawPokemon() {
     setHTML('api-poke', template)
 }
 
+function _drawActivePokemon() {
+    let pokemon = appState.activePokemon
+    if (pokemon) {
+        setHTML('active-pokemon', pokemon.ActiveTemplate)
+    } else {
+
+    }
+}
+
 
 
 
@@ -20,7 +29,7 @@ function _drawPokemon() {
 export class PokedexController {
     constructor() {
 
-
+        appState.on('activePokemon', _drawActivePokemon)
         appState.on('pokemon', _drawPokemon)
         this.getPokedex()
     }
@@ -38,7 +47,7 @@ export class PokedexController {
 
     async getOnePokemon(name) {
         try {
-            debugger
+
             await pokedexService.getOnePokemon(name)
         } catch (error) {
             Pop.error(error.message)
